@@ -8,7 +8,7 @@ public class VoteController {
 
     @RequestMapping("/")
     public String index() {
-        return "Greetings from Spring Boot!";
+        return "Get ready to vote on stuff";
     }
 
 }
