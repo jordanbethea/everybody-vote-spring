@@ -19,7 +19,7 @@ public class Selection {
     private String description;
     private int position; //position on the slate ordering (if position is manual)
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private Slate slate;
 
     protected Selection(){}
@@ -45,7 +45,7 @@ public class Selection {
 
     @Override
     public String toString(){
-        return String.format("Selection[id=%d, name=%s, description=%s, position=%i",
+        return String.format("Selection[id=%1$s, name=%2$s, description=%3$s, position=%4$s",
                 this.id, this.name,this.description,this.position);
     }
 }

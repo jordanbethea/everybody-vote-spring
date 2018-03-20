@@ -1,13 +1,9 @@
 package vote.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -23,24 +19,41 @@ public class Slate {
 
     //name of person who created slate, no account system so no user id
     private String creator;
+    //What you are voting on
+    private String topic;
     private Date dateCreated;
 
-    @OneToMany(mappedBy="slate")
-    private List<Selection> selections;
+    @OneToMany(mappedBy="slate", fetch= FetchType.EAGER)
+    private List<Selection> selections = new ArrayList<Selection>();
 
     //generic constructor required by jpa
     protected Slate(){}
 
-    public Slate(List<Selection> selections, String creator, Date dateCreated){
-        this.selections = selections;
+    public Slate(String topic, String creator, Date dateCreated){
+        this.selections = new ArrayList<Selection>();
+        this.topic = topic;
         this.creator = creator;
         this.dateCreated = dateCreated;
     }
 
+    public void setCreator(String creator){ this.creator = creator;}
+    public String getCreator(){return this.creator;}
+
+    public void setDateCreated(Date dateCreated){this.dateCreated = dateCreated;}
+    public Date getDateCreated(){ return this.dateCreated;}
+
+    public void setTopic(String topic){this.topic = topic; }
+    public String getTopic(){return this.topic;}
+
+    public void setSelections(List<Selection> selections){ this.selections = selections;}
+    public List<Selection> getSelections(){ return this.selections;}
+    public void addSelection(Selection s){ this.selections.add(s);}
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        String slateDesc = String.format("Slate[creator=%s, dateCreated=%d", this.creator, this.dateCreated);
+        String slateDesc = String.format("Slate[topic=%1$s, creator=%2$s, dateCreated=%3$s",
+                this.topic, this.creator, this.dateCreated);
         sb.append(slateDesc);
         for(Selection s : selections){
             sb.append(s.toString());
