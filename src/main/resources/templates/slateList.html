@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Slates</title>
+
+</head>
+<body>
+<div th:each="slate: ${slates}">
+    <p th:text="${slate.topic}">topic</p>
+    <p th:text="${slate.creator}">creator</p>
+    <p th:text="${slate.dateCreated}">createDate</p>
+    <div th:each="selection: ${slate.selections}">
+        <p th:text="${selection.name}">name</p>
+        <p th:text="${selection.description}">description</p>
+        <p th:text="${selection.position}">position</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -2,12 +2,14 @@ package vote.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import vote.repositories.*;
 
-@RestController
+@Controller
 @RequestMapping("/slate")
 public class SlateController{
 
