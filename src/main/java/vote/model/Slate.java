@@ -27,7 +27,7 @@ public class Slate {
     private List<Selection> selections = new ArrayList<Selection>();
 
     //generic constructor required by jpa
-    protected Slate(){}
+    public Slate(){}
 
     public Slate(String topic, String creator, Date dateCreated){
         this.selections = new ArrayList<Selection>();
@@ -35,6 +35,9 @@ public class Slate {
         this.creator = creator;
         this.dateCreated = dateCreated;
     }
+
+    public void setId(Long id){ this.id = id; }
+    public Long getId(){return this.id;}
 
     public void setCreator(String creator){ this.creator = creator;}
     public String getCreator(){return this.creator;}
@@ -52,7 +55,7 @@ public class Slate {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        String slateDesc = String.format("Slate[topic=%1$s, creator=%2$s, dateCreated=%3$s",
+        String slateDesc = String.format("Slate[topic=%1$s, creator=%2$s, dateCreated=%3$s]",
                 this.topic, this.creator, this.dateCreated);
         sb.append(slateDesc);
         for(Selection s : selections){

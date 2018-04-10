@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View Slate</title>
+</head>
+<body>
+    <div th:object="${slate}">
+        <h2 th:text="*{topic}">Slate Topic</h2>
+        <p>Creator: <span type="text" th:text="*{creator}">Slate creator</span></p>
+        <p>Selections: </p>
+        <div th:each="selection,selStat : *{selections}">
+            <p>Name: <span type="text" th:text="*{selections[__${selStat.index}__].name}"></span></p>
+            <p>Description: <span type="text" th:text="*{selections[__${selStat.index}__].description}"></span></p>
+            <p>Order: <span type="text" th:text="*{selections[__${selStat.index}__].position}"></span></p>
+        </div>
+    </div>
+</body>
+</html>

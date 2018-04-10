@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create new Slate</title>
+
+</head>
+<body>
+    <h2>New Slate</h2>
+    <form action="#" th:action="@{/slate/create}" th:object="${newSlate}" method="post">
+        <p>Topic: <input type="text" th:field="*{topic}" /></p>
+        <p>Creator: <input type="text" th:field="*{creator}" /></p>
+        <p>Selections: </p>
+        <div th:each="selection, selStat : ${newSlate.selections}">
+            <p>Name: <input type="text" th:field="*{selections[__${selStat.index}__].name}"/></p>
+            <p>Description: <input type="text" th:field="*{selections[__${selStat.index}__].description}"/></p>
+            <p>Order: <input type="text" th:field="*{selections[__${selStat.index}__].position}"/></p> -->
+        </div>
+        <input type="submit" value="Create Slate"/>
+    </form>
+</body>
+</html>

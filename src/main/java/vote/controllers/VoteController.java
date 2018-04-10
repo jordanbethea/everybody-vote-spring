@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class VoteController {
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     public String index() {
         return "Get ready to vote on stuff";
-    }
+    }*/
 
 }

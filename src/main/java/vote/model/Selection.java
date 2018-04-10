@@ -22,7 +22,7 @@ public class Selection {
     @ManyToOne(fetch=FetchType.EAGER)
     private Slate slate;
 
-    protected Selection(){}
+    public Selection(){}
 
     public Selection(String name, String description, int position, Slate slate){
         this.name = name;
@@ -45,7 +45,7 @@ public class Selection {
 
     @Override
     public String toString(){
-        return String.format("Selection[id=%1$s, name=%2$s, description=%3$s, position=%4$s",
+        return String.format("Selection[id=%1$s, name=%2$s, description=%3$s, position=%4$s]",
                 this.id, this.name,this.description,this.position);
     }
 }
