@@ -15,9 +15,13 @@
         <div th:each="selection, selStat : ${newSlate.selections}">
             <p>Name: <input type="text" th:field="*{selections[__${selStat.index}__].name}"/></p>
             <p>Description: <input type="text" th:field="*{selections[__${selStat.index}__].description}"/></p>
-            <p>Order: <input type="text" th:field="*{selections[__${selStat.index}__].position}"/></p> -->
+            <p>Order: <input type="text" th:field="*{selections[__${selStat.index}__].position}"/></p>
+            <button type="submit" name="removeRow" th:value="${selStat.index}" value="Remove Row">Remove Row</button>
+            <button type="submit" name="rowUp" th:value="${selStat.index}" value="Row Up">Row Up</button>
+            <button type="submit" name="rowDown" th:value="${selStat.index}" value="Row Down">Row Down</button>
         </div>
-        <input type="submit" value="Create Slate"/>
+        <button type="submit" name="addRow" value="Add Selection">Add Selection</button>
+        <button type="submit" value="Create Slate">Create Slate</button>
     </form>
 </body>
 </html>

@@ -57,16 +57,44 @@ public class SlateController{
     }
 
     @RequestMapping(value="/create", params={"addRow"})
-    public String addSelection(@ModelAttribute Slate newSlate,final BindingResult bindingResult) {
+    public String addSelection(@ModelAttribute Slate newSlate,final BindingResult bindingResult, Model model) {
         newSlate.getSelections().add(new Selection());
+        model.addAttribute("newSlate", newSlate);
         return "newSlate";
     }
 
     @RequestMapping(value="/create", params={"removeRow"})
     public String removeSelection(@ModelAttribute Slate newSlate, final BindingResult bindingResult,
-            final HttpServletRequest req) {
-        Integer toRemove = new Integer(req.getParameter("removeRow"));
-        newSlate.getSelections().remove(toRemove);
+            final HttpServletRequest req, Model model) {
+        int toRemove = new Integer(req.getParameter("removeRow"));
+        log.info("Removing Row "+toRemove+" from Slate "+newSlate.getTopic()+", num selections: "+newSlate.getSelections().size());
+        Selection removed = newSlate.getSelections().remove(toRemove);
+        log.info("Removed, now is length: "+newSlate.getSelections().size());
+        model.addAttribute("newSlate", newSlate);
+        return "newSlate";
+    }
+
+    @RequestMapping(value="/create", params={"rowUp"})
+    public String moveSelectionUp(@ModelAttribute Slate newSlate, final BindingResult bindingResult,
+            final HttpServletRequest req, Model model) {
+        int position = new Integer(req.getParameter("rowUp"));
+        if(position > 0 && position <= newSlate.getSelections().size() - 1) {
+            Selection toMove = newSlate.getSelections().remove(position);
+            newSlate.getSelections().add(position - 1, toMove);
+        }
+        model.addAttribute("newSlate", newSlate);
+        return "newSlate";
+    }
+
+    @RequestMapping(value="/create", params={"rowDown"})
+    public String moveSelectionDown(@ModelAttribute Slate newSlate, final BindingResult bindingResult,
+                                  final HttpServletRequest req, Model model) {
+        int position = new Integer(req.getParameter("rowDown"));
+        if(position >= 0 && position < newSlate.getSelections().size() - 1) {
+            Selection toMove = newSlate.getSelections().remove(position);
+            newSlate.getSelections().add(position + 1, toMove);
+        }
+        model.addAttribute("newSlate", newSlate);
         return "newSlate";
     }
 
