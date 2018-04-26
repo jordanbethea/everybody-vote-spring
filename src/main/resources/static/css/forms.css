@@ -1,0 +1,22 @@
+.fields{
+    display:inline-block;
+    }
+
+.buttons{
+    display:inline-block;
+    height: 100%;
+}
+
+.buttons button{ display: inline; }
+
+.buttons .moveUpButton{
+    vertical-align:top;
+}
+
+.buttons .moveDownButton{
+    vertical-align:bottom;
+    }
+
+.container{
+    display:block;
+    }

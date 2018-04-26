@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.validation.BindingResult;
+import java.util.List;
 
 import org.springframework.ui.Model;
 
+import vote.model.Ballot;
 import vote.repositories.*;
 import vote.model.Slate;
 import vote.model.Selection;
@@ -29,14 +31,16 @@ import javax.servlet.http.HttpServletRequest;
 public class SlateController{
     private static final Logger log = LoggerFactory.getLogger(SlateController.class);
 
-
     private final SelectionRepository selRepository;
     private final SlateRepository slateRepository;
+    private final BallotRepository ballotRepository;
 
     @Autowired
-    public SlateController(SelectionRepository selectionRepository, SlateRepository slateRepository){
+    public SlateController(SelectionRepository selectionRepository,
+                           SlateRepository slateRepository, BallotRepository ballotRepository){
         this.selRepository = selectionRepository;
         this.slateRepository = slateRepository;
+        this.ballotRepository = ballotRepository;
     }
 
     @RequestMapping()
@@ -117,6 +121,9 @@ public class SlateController{
         Long longId = new Long(id);
         Slate toView = slateRepository.findOne(longId);
         model.addAttribute("slate", toView);
+
+        List<Ballot> ballots = ballotRepository.findByVotedSlate(toView);
+        model.addAttribute("ballots", ballots);
 
         return "viewSlate";
     }

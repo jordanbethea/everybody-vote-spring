@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Slates</title>
-
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
 <div th:each="slate: ${slates}">
@@ -16,6 +18,7 @@
         <p th:text="${selection.description}">description</p>
         <p th:text="${selection.position}">position</p>
     </div>
+    <a th:href="@{/slate/show/{slateID}(slateID=${slate.id})}" href="#">View this Slate</a>
 </div>
 
 </body>

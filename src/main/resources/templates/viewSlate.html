@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>View Slate</title>
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
     <div th:object="${slate}">
@@ -14,6 +17,11 @@
             <p>Description: <span type="text" th:text="*{selections[__${selStat.index}__].description}"></span></p>
             <p>Order: <span type="text" th:text="*{selections[__${selStat.index}__].position}"></span></p>
         </div>
+    </div>
+    <a th:href="@{/vote/{slateID}(slateID=${slate.id})}" href="#">Vote on this Slate</a>
+    <div th:each="ballot,ballotStat : ${ballots}">
+        <p>Voter: <span type="text" th:text="${ballot.voter}"></span></p>
+        <p>Selection: <span type="text" th:text="${ballot.singleVoteChoice.name}"></span></p>
     </div>
 </body>
 </html>

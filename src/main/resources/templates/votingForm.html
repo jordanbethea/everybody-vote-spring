@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New Vote</title>
+</head>
+<body>
+    <h1 th:text="${slate.topic}">Topic Text</h1>
+    <h3>Choices:</h3>
+    <div th:each="selection,selStat : ${slate.selections}">
+        <h6 th:text="${selection.name}"></h6>
+        <p th:text="${selection.description}"></p>
+    </div>
+    <form action="#" th:action="@{/vote/{slateID}/create(slateID=${slate.id})}" th:object="${ballot}" method="post">
+        <p>Voter Name: <input type="text" th:field="*{voter}"/></p>
+        <ul><li th:each="selection,selStat : ${slate.selections}">
+            <input type="radio" th:field="*{singleVoteChoice}" th:value="${selection.id}"/>
+            <label th:for="${#ids.prev('singleVoteChoice')}" th:text="${selection.name}">Selection Name</label>
+        </li></ul>
+        <button type="submit" value="Cast Vote">Cast Vote</button>
+    </form>
+
+</body>
+</html>

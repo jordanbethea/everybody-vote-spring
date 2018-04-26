@@ -4,21 +4,32 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Create new Slate</title>
-
+    <!--<th:block th:replace="~{base :: commonIncludes}"></th:block> -->
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/css/forms.css" rel="stylesheet"></link>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
     <h2>New Slate</h2>
     <form action="#" th:action="@{/slate/create}" th:object="${newSlate}" method="post">
+
         <p>Topic: <input type="text" th:field="*{topic}" /></p>
         <p>Creator: <input type="text" th:field="*{creator}" /></p>
         <p>Selections: </p>
-        <div th:each="selection, selStat : ${newSlate.selections}">
-            <p>Name: <input type="text" th:field="*{selections[__${selStat.index}__].name}"/></p>
-            <p>Description: <input type="text" th:field="*{selections[__${selStat.index}__].description}"/></p>
-            <p>Order: <input type="text" th:field="*{selections[__${selStat.index}__].position}"/></p>
-            <button type="submit" name="removeRow" th:value="${selStat.index}" value="Remove Row">Remove Row</button>
-            <button type="submit" name="rowUp" th:value="${selStat.index}" value="Row Up">Row Up</button>
-            <button type="submit" name="rowDown" th:value="${selStat.index}" value="Row Down">Row Down</button>
+        <div class="container" th:each="selection, selStat : ${newSlate.selections}">
+            <div class="fields">
+                <p>Name: <input type="text" th:field="*{selections[__${selStat.index}__].name}"/></p>
+                <p>Description: <input type="text" th:field="*{selections[__${selStat.index}__].description}"/></p>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="moveUpButton" name="rowUp"
+                        th:value="${selStat.index}" value="Row Up">Row Up</button>
+                <button type="submit" class="moveDownButton" name="rowDown"
+                        th:value="${selStat.index}" value="Row Down">Row Down</button>
+                <button type="submit" class="removeButton" name="removeRow"
+                        th:value="${selStat.index}" value="Remove Row">Remove Row</button>
+            </div>
         </div>
         <button type="submit" name="addRow" value="Add Selection">Add Selection</button>
         <button type="submit" value="Create Slate">Create Slate</button>

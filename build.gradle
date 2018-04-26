@@ -35,6 +35,9 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.webjars:bootstrap:3.3.6")
+    compile("org.webjars:bootstrap-datepicker:1.0.1")
+    compile("org.webjars:jquery:1.9.1")
 
     compile("com.h2database:h2")
     testCompile("junit:junit")
