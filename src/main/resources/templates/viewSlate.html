@@ -22,6 +22,12 @@
     <div th:each="ballot,ballotStat : ${ballots}">
         <p>Voter: <span type="text" th:text="${ballot.voter}"></span></p>
         <p>Selection: <span type="text" th:text="${ballot.singleVoteChoice.name}"></span></p>
+        <ol>
+            <li th:each="rankedChoice, rankStat : ${ballot.rankedChoices}">
+                <p th:text="${rankedChoice.selection.name}">Selection name</p>
+                <p>Rank: <span th:text="${rankedChoice.ranking}">#</span></p>
+            </li>
+        </ol>
     </div>
 </body>
 </html>

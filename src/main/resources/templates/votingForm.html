@@ -13,10 +13,24 @@
     </div>
     <form action="#" th:action="@{/vote/{slateID}/create(slateID=${slate.id})}" th:object="${ballot}" method="post">
         <p>Voter Name: <input type="text" th:field="*{voter}"/></p>
+        <h3>Single choice Vote:</h3>
         <ul><li th:each="selection,selStat : ${slate.selections}">
             <input type="radio" th:field="*{singleVoteChoice}" th:value="${selection.id}"/>
             <label th:for="${#ids.prev('singleVoteChoice')}" th:text="${selection.name}">Selection Name</label>
         </li></ul>
+        <h3>Ranked Choice Vote:</h3>
+        <ol>
+            <li th:each="ranking,rankStat : ${ballot.rankedChoices}">
+                <p th:text="*{rankedChoices[__${rankStat.index}__].selection.name}">Selection name</p>
+                <input type="hidden" th:field="*{rankedChoices[__${rankStat.index}__].selection}"/>
+                <input type="hidden" th:name="rankedChoices[__${rankStat.index}__].ranking"
+                       th:value="${rankStat.index}"/>
+                <button type="submit" class="rankUpButton" name="rankUp"
+                        th:value="${rankStat.index}" value="Rank Up">Rank Up</button>
+                <button type="submit" class="rankDownButton" name="rankDown"
+                        th:value="${rankStat.index}" value="Rank Down">Rank Down</button>
+            </li>
+        </ol>
         <button type="submit" value="Cast Vote">Cast Vote</button>
     </form>
 

@@ -21,6 +21,7 @@
             <div class="fields">
                 <p>Name: <input type="text" th:field="*{selections[__${selStat.index}__].name}"/></p>
                 <p>Description: <input type="text" th:field="*{selections[__${selStat.index}__].description}"/></p>
+                <input type="hidden" th:name="selections[__${selStat.index}__].position" th:value="${selStat.index}"/>
             </div>
             <div class="buttons">
                 <button type="submit" class="moveUpButton" name="rowUp"
