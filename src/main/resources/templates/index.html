@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Everybody Vote</title>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
+</head>
+<body>
+    <div th:replace="navbar"></div>
+    <div class="container">
+        <p>View list of all existing slates to vote on: <a href="/slate">All Slates</a></p>
+        <p>Create a new slate of your very own: <a href="/slate/new">Create new slate</a></p>
+    </div>
+</body>
+</html>

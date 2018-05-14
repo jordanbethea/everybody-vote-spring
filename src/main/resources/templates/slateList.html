@@ -4,22 +4,25 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Slates</title>
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
-    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/css/general.css" rel="stylesheet"></link>
 </head>
 <body>
-<div th:each="slate: ${slates}">
-    <p th:text="${slate.topic}">topic</p>
-    <p th:text="${slate.creator}">creator</p>
-    <p th:text="${slate.dateCreated}">createDate</p>
-    <div th:each="selection: ${slate.selections}">
-        <p th:text="${selection.name}">name</p>
-        <p th:text="${selection.description}">description</p>
-        <p th:text="${selection.position}">position</p>
+    <div th:replace="navbar"></div>
+    <div class="container">
+        <div th:each="slate: ${slates}">
+            <p th:text="${slate.topic}">topic</p>
+            <p th:inline="text">Created by [[${slate.creator}]] on [[${slate.dateCreated}]]</p>
+            <!--<p th:text="${slate.creator}">creator</p>
+            <p th:text="${slate.dateCreated}">createDate</p> -->
+            <div th:each="selection: ${slate.selections}">
+                <p class="selectionName" th:text="${selection.name}">name</p>
+                <p class="selectionDesc" th:text="${selection.description}"></p>
+                <!-- <p th:text="${selection.position}">position</p> -->
+            </div>
+            <a th:href="@{/slate/show/{slateID}(slateID=${slate.id})}" href="#">View this Slate</a>
+        </div>
     </div>
-    <a th:href="@{/slate/show/{slateID}(slateID=${slate.id})}" href="#">View this Slate</a>
-</div>
 
 </body>
 </html>

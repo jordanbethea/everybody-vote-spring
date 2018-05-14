@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8"/>
     <title>New Vote</title>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
 </head>
 <body>
+    <div th:replace="navbar"></div>
+    <div class="container">
     <h1 th:text="${slate.topic}">Topic Text</h1>
     <h3>Choices:</h3>
     <div th:each="selection,selStat : ${slate.selections}">
@@ -33,6 +36,7 @@
         </ol>
         <button type="submit" value="Cast Vote">Cast Vote</button>
     </form>
+    </div>
 
 </body>
 </html>

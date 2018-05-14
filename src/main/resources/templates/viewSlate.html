@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8"/>
     <title>View Slate</title>
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
-    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/css/general.css" rel="stylesheet"></link>
 </head>
 <body>
+    <div th:replace="navbar"></div>
+    <div class="container">
     <div th:object="${slate}">
         <h2 th:text="*{topic}">Slate Topic</h2>
         <p>Creator: <span type="text" th:text="*{creator}">Slate creator</span></p>
         <p>Selections: </p>
         <div th:each="selection,selStat : *{selections}">
-            <p>Name: <span type="text" th:text="*{selections[__${selStat.index}__].name}"></span></p>
-            <p>Description: <span type="text" th:text="*{selections[__${selStat.index}__].description}"></span></p>
-            <p>Order: <span type="text" th:text="*{selections[__${selStat.index}__].position}"></span></p>
+            <p class="selectionName" th:text="*{selections[__${selStat.index}__].name}"></p>
+            <p class="selectionDesc" th:text="*{selections[__${selStat.index}__].description}"></p>
+            <!-- <p>Order: <span type="text" th:text="*{selections[__${selStat.index}__].position}"></span></p> -->
         </div>
     </div>
     <a th:href="@{/vote/{slateID}(slateID=${slate.id})}" href="#">Vote on this Slate</a>
     <div th:each="ballot,ballotStat : ${ballots}">
         <p>Voter: <span type="text" th:text="${ballot.voter}"></span></p>
-        <p>Selection: <span type="text" th:text="${ballot.singleVoteChoice.name}"></span></p>
+        <p class="selectionName">Selection: <span type="text" th:text="${ballot.singleVoteChoice.name}"></span></p>
         <ol>
             <li th:each="rankedChoice, rankStat : ${ballot.rankedChoices}">
-                <p th:text="${rankedChoice.selection.name}">Selection name</p>
+                <p class="selectionName" th:text="${rankedChoice.selection.name}">Selection name</p>
                 <p>Rank: <span th:text="${rankedChoice.ranking}">#</span></p>
             </li>
         </ol>
+    </div>
     </div>
 </body>
 </html>
