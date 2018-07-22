@@ -3,7 +3,7 @@ package vote.model;
 import javax.persistence.*;
 
 @Entity
-public class RankedChoice {
+public class RankedChoice implements Comparable<RankedChoice>{
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -35,4 +35,9 @@ public class RankedChoice {
 
     public Ballot getBallot(){ return ballot;}
     public void setBallot(Ballot ballot){this.ballot = ballot;}
+
+    @Override
+    public int compareTo(RankedChoice other) {
+        return this.ranking - other.ranking;
+    }
 }
