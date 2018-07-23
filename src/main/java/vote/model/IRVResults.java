@@ -92,6 +92,7 @@ public class IRVResults {
             this.round = round;
             this.remainingSelections = remainingSelections;
             allResults = new HashMap<>();
+            Collections.sort(remainingSelections);
         }
 
         public void addVote(Selection choice) {
@@ -109,8 +110,8 @@ public class IRVResults {
         public void evaluateRound() {
             BigDecimal totalVotesBD = new BigDecimal(totalVotes);
             ResultCount highest = null;
-            for(ResultCount rc: allResults.values()) {
-                //float percent = (rc.getCount() * 100.0f) / totalVotes;
+            for(Selection s : remainingSelections){
+                ResultCount rc = allResults.get(s);
                 BigDecimal countBD = new BigDecimal(rc.getCount());
                 BigDecimal percent = countBD.divide(totalVotesBD,4, RoundingMode.HALF_UP);
                 rc.setPercentage(percent);

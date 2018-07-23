@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 //TODO - see if I want to make this embeddable, don't know much about it yet
 @Entity
-public class Selection {
+public class Selection implements Comparable<Selection>{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -50,5 +50,10 @@ public class Selection {
     public String toString(){
         return String.format("Selection[id=%1$s, name=%2$s, description=%3$s, position=%4$s]",
                 this.id, this.name,this.description,this.position);
+    }
+
+    @Override
+    public int compareTo(Selection other) {
+        return this.position - other.position;
     }
 }
