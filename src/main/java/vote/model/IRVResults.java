@@ -26,8 +26,10 @@ public class IRVResults {
     List<RoundResults> roundResults;
 
     public IRVResults(List<Ballot> ballots) {
+        roundResults = new ArrayList<>();
         int round = 0;
         boolean winner = false;
+        totalVotes = ballots.size();
         if(ballots.size() > 0){ slate = ballots.get(0).getVotedSlate();}
         else slate = null;
         //make copy of ranked results so they can be manipulated apart from the raw results
@@ -53,8 +55,10 @@ public class IRVResults {
             }
             results.evaluateRound();
             roundResults.add(results);
-            if(results.getWinner() != null){ winner = true; }
-            else {
+            if(results.getWinner() != null){
+                winner = true;
+                overallWinner = results.getWinner().getSelection();
+            } else {
                 availableSelections.remove(results.getLowest().getSelection());
                 for(List<RankedChoice> singleRankedVote: allRankedResults) {
                     RankedChoice match = null;
@@ -71,7 +75,7 @@ public class IRVResults {
             //check if that total is more than 50% of all votes cast
             //If so, mark winner, return results
 
-            //if not, find lowest count total among all options
+            //if not, find lowest count total among all options (if tie, uses first in order)
             //remove that option from all ballot data
         }
     }

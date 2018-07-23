@@ -78,4 +78,28 @@ public class Ballot {
         if(newIndex >= rankedChoices.size()){rankedChoices.add(selected);}
         else{ rankedChoices.add(newIndex, selected);}
     }
+
+    /**
+     * Puts the ranked voting selections in the specified order based on selection ordering
+     * used mainly for unit testing
+     * @param order
+     */
+    public void rankingOrder(List<Integer> order) {
+        int rankingPos = 1;
+        if(order.size() != votedSlate.getSelections().size()){ return; }
+        for(Integer i = 1;i <= order.size();i++){ if(!order.contains(i)){return;}}
+        //first, ensure list is same size as list of selections, and contains 1..x values
+        List<RankedChoice> choices = new ArrayList<>();
+        for(Integer choice : order) {
+            for(Selection s: votedSlate.getSelections()) {
+                if(choice.equals(s.getPosition())){
+                    RankedChoice ranking = new RankedChoice(s,rankingPos);
+                    choices.add(ranking);
+                    rankingPos++;
+                    break;
+                }
+            }
+        }
+        rankedChoices = choices;
+    }
 }
