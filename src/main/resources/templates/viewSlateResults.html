@@ -17,13 +17,17 @@
     </ol>
     <h3>Ranked Choice Voting Methods</h3>
     <h4>Instant Runoff</h4>
-    <div th:each="roundResult : ${irvResults.roundResults}">
+    <div class="irvRound" th:each="roundResult : ${irvResults.roundResults}">
         <!-- <span th:text="${roundResult}"></span> -->
 
-        <p>Round: <span th:text="${roundResult.round}"></span></p>
-        <p>Possible Selections:</p>
-        <ul><li th:each="selection:${roundResult.remainingSelections}"><span th:text="${selection.name}"></span></li></ul>
-        <div th:each="selection : ${roundResult.remainingSelections}" th:with="count=${roundResult.allResults.get(selection)}">
+        <h6>Round: <span th:text="${roundResult.round}"></span></h6>
+        <p>Possible Selections:
+            <span th:each="selection, selStat:${roundResult.remainingSelections}">
+                <span th:text="${selStat.last} ? ${selection.name} : ${selection.name} + ','"></span>
+            </span>
+        </p>
+
+        <div class="littleResultsBox" th:each="selection : ${roundResult.remainingSelections}" th:with="count=${roundResult.allResults.get(selection)}">
             <p><span th:text="${selection.name}"></span>: <span th:text="${count.count}"></span> votes, <span th:text="${count.percentage}"></span> of total</p>
         </div>
         <div th:switch="${roundResult.winner}">

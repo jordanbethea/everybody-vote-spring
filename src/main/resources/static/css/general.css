@@ -7,3 +7,16 @@
     font-size: 10px;
     font-style: italic;
 }
+
+.littleResultsBox{
+    display: inline-block;
+    outline: solid;
+    margin-left:10px;
+}
+.irvRound{
+    margin-left:20px;
+    margin-bottom: 20px;
+}
+.irvRound p, .irvRound h6{
+    margin-bottom:0px;
+}
