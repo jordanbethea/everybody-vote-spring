@@ -20,9 +20,10 @@
         </div>
     </div>
     <a th:href="@{/vote/{slateID}(slateID=${slate.id})}" href="#">Vote on this Slate</a>
+    <a th:href="@{/slate/results/{slateID}(slateID=${slate.id})}" href="#">View Results of voting</a>
     <div th:each="ballot,ballotStat : ${ballots}">
         <p>Voter: <span type="text" th:text="${ballot.voter}"></span></p>
-        <p class="selectionName">Selection: <span type="text" th:text="${ballot.singleVoteChoice.name}"></span></p>
+        <p class="selectionName">Selection: <span type="text" th:text="${ballot.singleVoteChoice?.name}"></span></p>
         <ol>
             <li th:each="rankedChoice, rankStat : ${ballot.rankedChoices}">
                 <p class="selectionName" th:text="${rankedChoice.selection.name}">Selection name</p>

@@ -4,8 +4,13 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 public class Ballot {
+    private static final Logger log = LoggerFactory.getLogger(Ballot.class);
+
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -34,7 +39,7 @@ public class Ballot {
 
     private void createRankedChoicesFromSlate() {
         for(Selection s: votedSlate.getSelections()) {
-            RankedChoice newChoice = new RankedChoice(s, 0);
+            RankedChoice newChoice = new RankedChoice(s, 0, this);
             rankedChoices.add(newChoice);
         }
     }
@@ -88,18 +93,21 @@ public class Ballot {
         int rankingPos = 1;
         if(order.size() != votedSlate.getSelections().size()){ return; }
         for(Integer i = 1;i <= order.size();i++){ if(!order.contains(i)){return;}}
+        log.info("Input order: "+order.toString());
         //first, ensure list is same size as list of selections, and contains 1..x values
         List<RankedChoice> choices = new ArrayList<>();
         for(Integer choice : order) {
             for(Selection s: votedSlate.getSelections()) {
-                if(choice.equals(s.getPosition())){
-                    RankedChoice ranking = new RankedChoice(s,rankingPos);
+                log.info("position: "+s.getPosition());
+                if(choice.equals(s.getPosition()+1)){ //position is 0 based, rank is 1 based
+                    RankedChoice ranking = new RankedChoice(s,rankingPos,this);
                     choices.add(ranking);
                     rankingPos++;
                     break;
                 }
             }
         }
+        if(rankedChoices.size() != choices.size()){ log.info("New list of ranked choices not same size as existing: "+choices.size());}
         rankedChoices = choices;
     }
 }

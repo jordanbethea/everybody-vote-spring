@@ -24,6 +24,12 @@ public class RankedChoice implements Comparable<RankedChoice>{
         this.ranking = ranking;
     }
 
+    public RankedChoice(Selection sel, int ranking, Ballot ballot) {
+        this.sel = sel;
+        this.ranking = ranking;
+        this.ballot = ballot;
+    }
+
     public Long getID(){ return this.id; }
     public void setID(Long id){ this.id = id;}
 

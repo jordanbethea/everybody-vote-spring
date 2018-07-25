@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Instant runoff election - used with ranked voting
  * Checks all top ranked results, calculates FPTP winner from them
@@ -19,11 +22,20 @@ import java.util.Comparator;
 
 
 public class IRVResults {
+    private static final Logger log = LoggerFactory.getLogger(IRVResults.class);
+
     Slate slate;
     int totalVotes;
     Date countDate;
     Selection overallWinner = null;
     List<RoundResults> roundResults;
+
+    public List<RoundResults> getRoundResults(){ return roundResults;}
+
+    public String toString() {
+        String format = "Slate topic: %s, total votes: %d \nRound Results: \n%s";
+        return String.format(slate.getTopic(), totalVotes, roundResults.toString());
+    }
 
     public IRVResults(List<Ballot> ballots) {
         roundResults = new ArrayList<>();
@@ -31,7 +43,7 @@ public class IRVResults {
         boolean winner = false;
         totalVotes = ballots.size();
         if(ballots.size() > 0){ slate = ballots.get(0).getVotedSlate();}
-        else slate = null;
+        else return;
         //make copy of ranked results so they can be manipulated apart from the raw results
         List<List<RankedChoice>> allRankedResults = new ArrayList<List<RankedChoice>>();
         for(Ballot b : ballots) {
@@ -42,10 +54,13 @@ public class IRVResults {
         }
         List<Selection> availableSelections = new ArrayList<>();
         availableSelections.addAll(slate.getSelections());
+        log.info("Initial available selections: "+availableSelections.toString());
 
         while(!winner) {
             round++;
-            RoundResults results = new RoundResults(round,availableSelections);
+            List<Selection> newAvailableSelections = new ArrayList<>();
+            newAvailableSelections.addAll(availableSelections);
+            RoundResults results = new RoundResults(round,newAvailableSelections);
             //If there is only one option remaining, that option is the winner by default
 
             for (List<RankedChoice> singleRankedVote : allRankedResults) {
@@ -88,10 +103,24 @@ public class IRVResults {
         ResultCount lowest = null;
         Map<Selection, ResultCount> allResults;
 
+        public int getRound(){ return round; }
+        public List<Selection> getRemainingSelections(){ return remainingSelections;}
+        public ResultCount getWinner(){ return winner;}
+        public ResultCount getLowest(){ return lowest;}
+        public Map<Selection, ResultCount> getAllResults(){ return allResults; }
+        public ResultCount getResultForSelection(Selection s){ return allResults.get(s);}
+
+        public String toString() {
+            String format = "Round %d of voting. Remaining selections: \n%s \n Full Results:\n%s\nWinner: %s\nLoser:\n%s";
+            return String.format(format, this.round, this.remainingSelections.toString(),
+                    allResults.toString(), winner, lowest);
+        }
+
         public RoundResults(int round, List<Selection> remainingSelections) {
             this.round = round;
             this.remainingSelections = remainingSelections;
             allResults = new HashMap<>();
+            for(Selection s : remainingSelections){ allResults.put(s, new ResultCount(s, 0));}
             Collections.sort(remainingSelections);
         }
 
@@ -103,9 +132,6 @@ public class IRVResults {
             allResults.put(choice, choiceData);
             totalVotes++;
         }
-
-        public ResultCount getWinner(){ return winner;}
-        public ResultCount getLowest(){ return lowest;}
 
         public void evaluateRound() {
             BigDecimal totalVotesBD = new BigDecimal(totalVotes);
@@ -144,6 +170,10 @@ public class IRVResults {
             public BigDecimal getPercentage(){ return percentage;}
             public void setPercentage(BigDecimal percentage){this.percentage = percentage;}
 
+            public String toString() {
+                String format = "Selection %s has %d votes, for %s percent of the vote";
+                return String.format(format, selection.getName(), count, percentage.toString());
+            }
             public int compareTo(ResultCount rc) {
                 return rc.getCount() - this.getCount();
             }

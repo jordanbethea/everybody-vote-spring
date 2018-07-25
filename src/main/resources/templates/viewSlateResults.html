@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View Slate</title>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/css/general.css" rel="stylesheet"></link>
+</head>
+<body>
+    <div th:replace="navbar"></div>
+    <h1>Results of voting on <span th:text="${slate.topic}">breakfast??</span></h1>
+    <h3>Single Choice Voting (First Past the Post)</h3>
+    <ol>
+        <li th:each="selection : ${slate.selections}">
+            <p><span th:text="${selection.name}"></span>, <span th:text="${FPTP.get(selection)}"></span> votes</p>
+        </li>
+    </ol>
+    <h3>Ranked Choice Voting Methods</h3>
+    <h4>Instant Runoff</h4>
+    <div th:each="roundResult : ${irvResults.roundResults}">
+        <!-- <span th:text="${roundResult}"></span> -->
+
+        <p>Round: <span th:text="${roundResult.round}"></span></p>
+        <p>Possible Selections:</p>
+        <ul><li th:each="selection:${roundResult.remainingSelections}"><span th:text="${selection.name}"></span></li></ul>
+        <div th:each="selection : ${roundResult.remainingSelections}" th:with="count=${roundResult.allResults.get(selection)}">
+            <p><span th:text="${selection.name}"></span>: <span th:text="${count.count}"></span> votes, <span th:text="${count.percentage}"></span> of total</p>
+        </div>
+        <div th:switch="${roundResult.winner}">
+            <div th:case="${null}">
+                <p>No winner, loser <span th:text="${roundResult.lowest.selection.name}"></span> will be removed from next round.</p>
+            </div>
+            <div th:case="*">
+                <p><span th:text="${roundResult.winner.selection.name}"></span> is the winner!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

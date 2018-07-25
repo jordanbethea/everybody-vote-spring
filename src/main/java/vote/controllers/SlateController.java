@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.validation.BindingResult;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.ui.Model;
 
@@ -21,6 +23,7 @@ import vote.model.Ballot;
 import vote.repositories.*;
 import vote.model.Slate;
 import vote.model.Selection;
+import vote.model.IRVResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -126,6 +129,33 @@ public class SlateController{
         model.addAttribute("ballots", ballots);
 
         return "viewSlate";
+    }
+
+    @RequestMapping(value="results/{id}", method=RequestMethod.GET)
+    public String showSlateResults(@PathVariable String id, Model model) {
+        Long longId = new Long(id);
+        Slate toView = slateRepository.findOne(longId);
+        List<Ballot> ballots = ballotRepository.findByVotedSlate(toView);
+
+        model.addAttribute("slate", toView);
+        model.addAttribute("ballots", ballots);
+
+        Map<Selection, Integer> FPTPresults = new HashMap<Selection, Integer>();
+        for(Ballot b : ballots) {
+            Selection s = b.getSingleVoteChoice();
+            Integer count = FPTPresults.get(s);
+            if(count == null){ count = 0;}
+            count++;
+            FPTPresults.put(s, count);
+        }
+        model.addAttribute("FPTP", FPTPresults);
+
+        IRVResults irv = new IRVResults(ballots);
+        log.debug(irv.toString());
+
+        model.addAttribute("irvResults", irv);
+
+        return "viewSlateResults";
     }
 
 }
