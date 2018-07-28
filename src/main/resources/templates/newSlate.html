@@ -24,11 +24,11 @@
             </div>
             <div class="buttons col-sm">
                 <button type="submit" class="moveUpButton" name="rowUp"
-                        th:value="${selStat.index}" value="Row Up">Row Up</button>
+                        th:value="${selStat.count}" value="Row Up">Row Up</button>
                 <button type="submit" class="moveDownButton" name="rowDown"
-                        th:value="${selStat.index}" value="Row Down">Row Down</button>
+                        th:value="${selStat.count}" value="Row Down">Row Down</button>
                 <button type="submit" class="removeButton" name="removeRow"
-                        th:value="${selStat.index}" value="Remove Row">Remove Row</button>
+                        th:value="${selStat.count}" value="Remove Row">Remove Row</button>
             </div>
         </div>
         <button type="submit" name="addRow" value="Add Selection">Add Selection</button>

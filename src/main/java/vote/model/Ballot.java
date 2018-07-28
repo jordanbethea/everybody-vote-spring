@@ -93,13 +93,13 @@ public class Ballot {
         int rankingPos = 1;
         if(order.size() != votedSlate.getSelections().size()){ return; }
         for(Integer i = 1;i <= order.size();i++){ if(!order.contains(i)){return;}}
-        log.info("Input order: "+order.toString());
+        //log.info("Input order: "+order.toString());
         //first, ensure list is same size as list of selections, and contains 1..x values
         List<RankedChoice> choices = new ArrayList<>();
         for(Integer choice : order) {
             for(Selection s: votedSlate.getSelections()) {
-                log.info("position: "+s.getPosition());
-                if(choice.equals(s.getPosition()+1)){ //position is 0 based, rank is 1 based
+                //log.info("position: "+s.getPosition());
+                if(choice.equals(s.getPosition())){
                     RankedChoice ranking = new RankedChoice(s,rankingPos,this);
                     choices.add(ranking);
                     rankingPos++;
@@ -107,7 +107,11 @@ public class Ballot {
                 }
             }
         }
-        if(rankedChoices.size() != choices.size()){ log.info("New list of ranked choices not same size as existing: "+choices.size());}
+        if(rankedChoices.size() != choices.size()){
+            log.info("New list of ranked choices not same size as existing: "+choices.size());
+            log.info(rankedChoices.toString());
+            log.info(choices.toString());
+        }
         rankedChoices = choices;
     }
 }

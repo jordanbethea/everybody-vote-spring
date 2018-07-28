@@ -46,4 +46,11 @@ public class RankedChoice implements Comparable<RankedChoice>{
     public int compareTo(RankedChoice other) {
         return this.ranking - other.ranking;
     }
+
+    @Override
+    public String toString() {
+        String format = "Ranked Choice[id: %s, Selection: %s (Position: %d), Ranking %d]";
+        return String.format(format, this.getID(), this.getSelection().getName(),
+                this.getSelection().getPosition(), this.getRanking());
+    }
 }

@@ -35,10 +35,10 @@ public class Application {
 
             log.info("Load some test data into repos:");
             Slate slate1 = new Slate("How would you like the world to end?", "Jordan", new java.util.Date());
-            Selection sel1 = new Selection("Fire", "Very hot", 0, slate1);
-            Selection sel2 = new Selection("Ice", "very cold", 1, slate1);
-            Selection sel3 = new Selection("Acid", "stings", 2, slate1);
-            Selection sel4 = new Selection("Electricity", "also stings", 3, slate1);
+            Selection sel1 = new Selection("Fire", "Very hot", 1, slate1);
+            Selection sel2 = new Selection("Ice", "very cold", 2, slate1);
+            Selection sel3 = new Selection("Acid", "stings", 3, slate1);
+            Selection sel4 = new Selection("Electricity", "also stings", 4, slate1);
             slate1.addSelection(sel1);
             slate1.addSelection(sel2);
             slate1.addSelection(sel3);

@@ -33,8 +33,8 @@ public class IRVResults {
     public List<RoundResults> getRoundResults(){ return roundResults;}
 
     public String toString() {
-        String format = "Slate topic: %s, total votes: %d \nRound Results: \n%s";
-        return String.format(slate.getTopic(), totalVotes, roundResults.toString());
+        String format = "Slate topic: %s, total votes: %d %nRound Results: %n%s";
+        return String.format(format, slate.getTopic(), totalVotes, roundResults.toString());
     }
 
     public IRVResults(List<Ballot> ballots) {
@@ -111,7 +111,7 @@ public class IRVResults {
         public ResultCount getResultForSelection(Selection s){ return allResults.get(s);}
 
         public String toString() {
-            String format = "Round %d of voting. Remaining selections: \n%s \n Full Results:\n%s\nWinner: %s\nLoser:\n%s";
+            String format = "Round %d of voting. Remaining selections: %n%s %nFull Results:%n%s%nWinner: %s%nLoser:%n%s";
             return String.format(format, this.round, this.remainingSelections.toString(),
                     allResults.toString(), winner, lowest);
         }
