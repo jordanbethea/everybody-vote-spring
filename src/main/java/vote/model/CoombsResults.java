@@ -82,6 +82,9 @@ public class CoombsResults {
         public ResultCount getWinner(){ return winner; }
         public ResultCount getLoser(){ return loser;}
         public int getRound(){ return round; }
+        public List<Selection> getRemainingSelections(){ return remainingSelections;}
+        public List<ResultCount> getFirstPlaceVotes(){ return firstPlaceVotes;}
+        public List<ResultCount> getLastPlaceVotes(){ return lastPlaceVotes;}
 
         public RoundResults(int round, List<Selection> remainingSelections, List<List<RankedChoice>> choices) {
             this.round = round;

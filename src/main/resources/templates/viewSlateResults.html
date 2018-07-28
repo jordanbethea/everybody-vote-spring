@@ -39,5 +39,36 @@
             </div>
         </div>
     </div>
+    <h4>Coombs Method</h4>
+    <div class="coombsRound" th:each="roundResult : ${coombsResults.roundResults}">
+        <h6>Round: <span th:text="${roundResult.round}"></span></h6>
+        <p>Possible Selections:
+            <span th:each="selection, selStat:${roundResult.remainingSelections}">
+                <span th:text="${selStat.last} ? ${selection.name} : ${selection.name} + ','"></span>
+            </span>
+        </p>
+        <p>First Place Votes:</p>
+        <div class="littleResultsBox" th:each="resultCount : ${roundResult.firstPlaceVotes}">
+            <p><span th:text="${resultCount.selection.name}"></span>: <span th:text="${resultCount.count}"></span> votes,
+            <span th:text="${resultCount.percentage}"></span> of the total</p>
+        </div>
+        <div th:switch="${roundResult.winner}">
+            <div th:case="${null}"><p>No Winner</p></div>
+            <div th:case="*">
+                <p><span th:text="${roundResult.winner.selection.name}"></span> is the winner!</p>
+            </div>
+        </div>
+        <p>Last Place Votes:</p>
+        <div class="littleResultsBox" th:each="resultCount : ${roundResult.lastPlaceVotes}">
+            <p><span th:text="${resultCount.selection.name}"></span>: <span th:text="${resultCount.count}"></span> votes,
+                <span th:text="${resultCount.percentage}"></span> of the total</p>
+        </div>
+        <div th:switch="${roundResult.winner}">
+            <div th:case="${null}">
+                <p><span th:text="${roundResult.loser.selection.name}"></span> is the loser, and will be removed for next round.</p>
+            </div>
+            <div th:case="*"></div>
+        </div>
+    </div>
 </body>
 </html>

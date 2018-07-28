@@ -19,11 +19,8 @@ import java.util.HashMap;
 
 import org.springframework.ui.Model;
 
-import vote.model.Ballot;
+import vote.model.*;
 import vote.repositories.*;
-import vote.model.Slate;
-import vote.model.Selection;
-import vote.model.IRVResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -154,6 +151,9 @@ public class SlateController{
         log.debug(irv.toString());
 
         model.addAttribute("irvResults", irv);
+
+        CoombsResults coombsResults = new CoombsResults(ballots);
+        model.addAttribute("coombsResults", coombsResults);
 
         return "viewSlateResults";
     }
