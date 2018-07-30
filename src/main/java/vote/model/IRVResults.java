@@ -31,6 +31,7 @@ public class IRVResults {
     List<RoundResults> roundResults;
 
     public List<RoundResults> getRoundResults(){ return roundResults;}
+    public Selection getOverallWinner(){ return overallWinner;}
 
     public String toString() {
         String format = "Slate topic: %s, total votes: %d %nRound Results: %n%s";
