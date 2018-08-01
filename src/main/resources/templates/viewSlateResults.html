@@ -70,5 +70,14 @@
             <div th:case="*"></div>
         </div>
     </div>
+    <h4>Copeland Method</h4>
+    <h6>Comparisons</h6>
+    <div class="comparisonRoundData" th:each="compResult : ${copelandResults.comparisonResults}">
+        <p th:text="|${compResult.comp1.name} (${compResult.comp1Count}) vs ${compResult.comp2.name} (${compResult.comp2Count})|"></p>
+    </div>
+    <h6>Selection Results</h6>
+    <div class="selectionRoundData" th:each="roundResult : ${copelandResults.selectionResults}">
+        <p th:text="|${roundResult.selection.name}: ${roundResult.wins} wins, ${roundResult.losses} losses, ${roundResult.ties} ties. Net Result: ${roundResult.net} |"></p>
+    </div>
 </body>
 </html>

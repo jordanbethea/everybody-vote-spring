@@ -155,6 +155,9 @@ public class SlateController{
         CoombsResults coombsResults = new CoombsResults(ballots);
         model.addAttribute("coombsResults", coombsResults);
 
+        CopelandResults copelandResults = new CopelandResults(ballots);
+        model.addAttribute("copelandResults", copelandResults);
+
         return "viewSlateResults";
     }
 
