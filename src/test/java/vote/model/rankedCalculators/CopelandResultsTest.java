@@ -1,7 +1,7 @@
 package vote.model.rankedCalculators;
 
 import org.junit.Test;
-import vote.model.CopelandResults;
+import vote.model.rankingCalculators.CopelandResults;
 import org.junit.Assert;
 
 public class CopelandResultsTest extends RankedCalculatorBase{

@@ -1,4 +1,4 @@
-package vote.model;
+package vote.model.rankingCalculators;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -10,6 +10,10 @@ import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vote.model.Ballot;
+import vote.model.RankedChoice;
+import vote.model.Selection;
+import vote.model.Slate;
 
 /**
  * Method of ranked voting

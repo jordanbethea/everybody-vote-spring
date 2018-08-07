@@ -2,11 +2,8 @@ package vote.model.rankedCalculators;
 
 import org.junit.Test;
 import org.junit.Assert;
-import vote.model.*;
-import vote.model.IRVResults.RoundResults;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
+import vote.model.rankingCalculators.IRVResults;
+import vote.model.rankingCalculators.IRVResults.RoundResults;
 
 public class IRVResultsTest extends RankedCalculatorBase{
 
