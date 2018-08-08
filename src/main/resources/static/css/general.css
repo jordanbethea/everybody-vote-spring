@@ -20,3 +20,8 @@
 .irvRound p, .irvRound h6{
     margin-bottom:0px;
 }
+
+.sideStack{
+    display: inline-block;
+    margin-left:10px;
+}

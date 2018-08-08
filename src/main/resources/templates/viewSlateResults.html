@@ -79,5 +79,27 @@
     <div class="selectionRoundData" th:each="roundResult : ${copelandResults.selectionResults}">
         <p th:text="|${roundResult.selection.name}: ${roundResult.wins} wins, ${roundResult.losses} losses, ${roundResult.ties} ties. Net Result: ${roundResult.net} |"></p>
     </div>
+    <h4>Borda Counts</h4>
+    <h6>Base 1 Count</h6>
+    <div class="selectionComparisonData" th:each="selectionResult : ${bordaBase1.selectionResults}">
+        <p th:text="|${selectionResult.selection.name} Total Score: ${selectionResult.totalScore}|"></p>
+        <div class="sideStack" th:each="rank : ${selectionResult.rankCounts.keySet()}">
+            <span th:text="|Ranking: ${rank}, Count: ${selectionResult.rankCounts.get(rank)}|"></span>
+        </div>
+    </div>
+    <h6>Base 0 Count</h6>
+    <div class="selectionComparisonData" th:each="selectionResult : ${bordaBase0.selectionResults}">
+        <p th:text="|${selectionResult.selection.name} Total Score: ${selectionResult.totalScore}|"></p>
+        <div class="sideStack" th:each="rank : ${selectionResult.rankCounts.keySet()}">
+            <span th:text="|Ranking: ${rank}, Count: ${selectionResult.rankCounts.get(rank)}|"></span>
+        </div>
+    </div>
+    <h6>Dowdall Count</h6>
+    <div class="selectionComparisonData" th:each="selectionResult : ${bordaDowdall.selectionResults}">
+        <p th:text="|${selectionResult.selection.name} Total Score: ${selectionResult.totalScore}|"></p>
+        <div class="sideStack" th:each="rank : ${selectionResult.rankCounts.keySet()}">
+            <span th:text="|Ranking: ${rank}, Count: ${selectionResult.rankCounts.get(rank)}|"></span>
+        </div>
+    </div>
 </body>
 </html>

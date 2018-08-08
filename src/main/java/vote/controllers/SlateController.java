@@ -17,9 +17,7 @@ import java.util.HashMap;
 import org.springframework.ui.Model;
 
 import vote.model.*;
-import vote.model.rankingCalculators.CoombsResults;
-import vote.model.rankingCalculators.CopelandResults;
-import vote.model.rankingCalculators.IRVResults;
+import vote.model.rankingCalculators.*;
 import vote.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,6 +155,14 @@ public class SlateController{
 
         CopelandResults copelandResults = new CopelandResults(ballots);
         model.addAttribute("copelandResults", copelandResults);
+
+        BordaCount base1 = new BordaCount(BordaCount.COUNT_TYPE.BASE_1, ballots);
+        BordaCount base0 = new BordaCount(BordaCount.COUNT_TYPE.BASE_0, ballots);
+        BordaCount dowdall = new BordaCount(BordaCount.COUNT_TYPE.DOWDALL, ballots);
+
+        model.addAttribute("bordaBase1", base1);
+        model.addAttribute("bordaBase0", base0);
+        model.addAttribute("bordaDowdall", dowdall);
 
         return "viewSlateResults";
     }
