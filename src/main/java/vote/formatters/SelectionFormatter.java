@@ -15,7 +15,7 @@ public class SelectionFormatter implements Formatter<Selection>{
 
     public Selection parse(String s, Locale locale) {
         Long id = new Long(s);
-        return selectionRepository.findOne(id);
+        return selectionRepository.findById(id).orElse(null);
     }
 
     public String print(Selection sel, Locale locale) {

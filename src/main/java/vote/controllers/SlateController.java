@@ -117,7 +117,7 @@ public class SlateController{
     @RequestMapping(value="/show/{id}", method=RequestMethod.GET)
     public String showSlate(@PathVariable String id, Model model) {
         Long longId = new Long(id);
-        Slate toView = slateRepository.findOne(longId);
+        Slate toView = slateRepository.findById(longId).orElse(null);
         model.addAttribute("slate", toView);
 
         List<Ballot> ballots = ballotRepository.findByVotedSlate(toView);
@@ -129,7 +129,7 @@ public class SlateController{
     @RequestMapping(value="results/{id}", method=RequestMethod.GET)
     public String showSlateResults(@PathVariable String id, Model model) {
         Long longId = new Long(id);
-        Slate toView = slateRepository.findOne(longId);
+        Slate toView = slateRepository.findById(longId).orElse(null);
         List<Ballot> ballots = ballotRepository.findByVotedSlate(toView);
 
         model.addAttribute("slate", toView);

@@ -77,11 +77,11 @@ public class Application {
 
 
             log.info("Saved data, now lets load");
-            Slate testSlate = slateRepo.findOne(1L);
+            Slate testSlate = slateRepo.findById(1L).orElse(null);
             if(testSlate == null){ log.info("Slate was null");}
             log.info(testSlate.toString());
 
-            Selection testSel = selRepo.findOne(2L);
+            Selection testSel = selRepo.findById(2L).orElse(null);
             if(testSel == null){ log.info("Selection was null");}
             log.info(testSel.toString());
 

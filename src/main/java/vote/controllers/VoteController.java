@@ -43,7 +43,7 @@ public class VoteController {
     @RequestMapping(value="/{slateIDs}", method= RequestMethod.GET)
     public String newVote(@PathVariable String slateIDs, Model model) {
         Long slateID = new Long(slateIDs);
-        Slate chosenSlate = slateRepository.findOne(slateID);
+        Slate chosenSlate = slateRepository.findById(slateID).orElse(null);
         model.addAttribute("slate", chosenSlate);
         Ballot newBallot = new Ballot();
         newBallot.setVotedSlate(chosenSlate);
@@ -56,7 +56,7 @@ public class VoteController {
     public String rankDown(@PathVariable String slateIDs, @ModelAttribute Ballot newBallot, final BindingResult bindingResult,
             final HttpServletRequest req, Model model) {
         Long slateID = new Long(slateIDs);
-        Slate chosenSlate = slateRepository.findOne(slateID);
+        Slate chosenSlate = slateRepository.findById(slateID).orElse(null);
         model.addAttribute("slate", chosenSlate);
         int ranking = new Integer(req.getParameter("rankDown"));
         newBallot.rankVoteDown(ranking);
@@ -68,7 +68,7 @@ public class VoteController {
     public String rankUp(@PathVariable String slateIDs, @ModelAttribute Ballot newBallot, final BindingResult bindingResult,
                            final HttpServletRequest req, Model model) {
         Long slateID = new Long(slateIDs);
-        Slate chosenSlate = slateRepository.findOne(slateID);
+        Slate chosenSlate = slateRepository.findById(slateID).orElse(null);
         model.addAttribute("slate", chosenSlate);
         int ranking = new Integer(req.getParameter("rankUp"));
         newBallot.rankVoteUp(ranking);
@@ -79,7 +79,7 @@ public class VoteController {
     @RequestMapping(value="/{slateIDs}/create", method=RequestMethod.POST)
     public RedirectView castVote(@PathVariable String slateIDs, @ModelAttribute Ballot newBallot, Model model) {
         Long slateID = new Long(slateIDs);
-        Slate chosenSlate = slateRepository.findOne(slateID);
+        Slate chosenSlate = slateRepository.findById(slateID).orElse(null);
         newBallot.setVotedSlate(chosenSlate);
 
         ballotRepository.save(newBallot);
