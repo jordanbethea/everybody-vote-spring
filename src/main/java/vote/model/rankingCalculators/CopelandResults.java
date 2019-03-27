@@ -1,10 +1,10 @@
 package vote.model.rankingCalculators;
 
 // import jdk.internal.dynalink.linker.ConversionComparator;
-import vote.model.Ballot;
-import vote.model.RankedChoice;
-import vote.model.Selection;
-import vote.model.Slate;
+import vote.model.entities.Ballot;
+import vote.model.entities.RankedChoice;
+import vote.model.entities.Selection;
+import vote.model.entities.Slate;
 
 import java.util.List;
 import java.util.ArrayList;

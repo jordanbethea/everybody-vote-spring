@@ -7,8 +7,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import vote.model.entities.Ballot;
+import vote.model.entities.RankedChoice;
+import vote.model.entities.Selection;
+import vote.model.entities.Slate;
 import vote.repositories.*;
-import vote.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

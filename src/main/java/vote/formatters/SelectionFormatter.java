@@ -3,7 +3,7 @@ package vote.formatters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
-import vote.model.Selection;
+import vote.model.entities.Selection;
 import java.util.Locale;
 import vote.repositories.SelectionRepository;
 

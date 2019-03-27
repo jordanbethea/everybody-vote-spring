@@ -1,8 +1,8 @@
 package vote.model.rankedCalculators;
 
-import vote.model.Ballot;
-import vote.model.Selection;
-import vote.model.Slate;
+import vote.model.entities.Ballot;
+import vote.model.entities.Selection;
+import vote.model.entities.Slate;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,9 +1,9 @@
 package vote.model.rankingCalculators;
 
-import vote.model.Slate;
-import vote.model.Selection;
-import vote.model.Ballot;
-import vote.model.RankedChoice;
+import vote.model.entities.Slate;
+import vote.model.entities.Selection;
+import vote.model.entities.Ballot;
+import vote.model.entities.RankedChoice;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.HashMap;

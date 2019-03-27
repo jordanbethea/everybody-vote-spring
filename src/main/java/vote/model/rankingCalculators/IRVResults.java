@@ -11,10 +11,10 @@ import java.util.Collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vote.model.Ballot;
-import vote.model.RankedChoice;
-import vote.model.Selection;
-import vote.model.Slate;
+import vote.model.entities.Ballot;
+import vote.model.entities.RankedChoice;
+import vote.model.entities.Selection;
+import vote.model.entities.Slate;
 
 /**
  * Instant runoff election - used with ranked voting

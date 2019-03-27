@@ -3,6 +3,9 @@ package vote.model;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
+import vote.model.entities.Ballot;
+import vote.model.entities.Selection;
+import vote.model.entities.Slate;
 
 import java.util.Arrays;
 import java.util.Date;

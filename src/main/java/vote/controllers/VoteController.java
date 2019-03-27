@@ -3,7 +3,6 @@ package vote.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.stereotype.Controller;
@@ -12,15 +11,15 @@ import vote.repositories.SelectionRepository;
 import vote.repositories.SlateRepository;
 import vote.repositories.BallotRepository;
 import vote.repositories.RankedChoiceRepository;
-import vote.model.RankedChoice;
+import vote.model.entities.RankedChoice;
 import org.springframework.validation.BindingResult;
 import javax.servlet.http.HttpServletRequest;
 
 
 import org.springframework.ui.Model;
 
-import vote.model.Ballot;
-import vote.model.Slate;
+import vote.model.entities.Ballot;
+import vote.model.entities.Slate;
 
 @Controller
 @RequestMapping("/vote")

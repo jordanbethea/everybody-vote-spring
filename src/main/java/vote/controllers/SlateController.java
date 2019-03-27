@@ -16,7 +16,9 @@ import java.util.HashMap;
 
 import org.springframework.ui.Model;
 
-import vote.model.*;
+import vote.model.entities.Ballot;
+import vote.model.entities.Selection;
+import vote.model.entities.Slate;
 import vote.model.rankingCalculators.*;
 import vote.repositories.*;
 import org.slf4j.Logger;
