@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/slate")
@@ -68,5 +69,20 @@ log.info("saved result: " + result.toString());
         newSlate.addSelection(new Selection());
         newSlate.addSelection(new Selection());
         return modelMapper.map(newSlate, SlateDTO.class);
+    }
+
+    @GetMapping(value = "/show/{id}")
+    public SlateDTO showSlate(@PathVariable String id){
+        Long longId = Long.parseLong(id);
+        Slate storedSlate = slateRepository.findById(longId).orElse(null);
+        if(storedSlate != null) {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(storedSlate, SlateDTO.class);
+        } else { return null; }
+    }
+
+    @GetMapping(value = "/results/{id}")
+    public void showSlateResults(@PathVariable String id){
+
     }
 }

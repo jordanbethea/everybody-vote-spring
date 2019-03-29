@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "75104a79-53f1-48a2-9ccf-9071874d93b9",
+		"name": "Everybody Vote api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request all slates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/api/slate",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"api",
+						"slate"
+					]
+				},
+				"description": "Returns list of all existing slates"
+			},
+			"response": []
+		},
+		{
+			"name": "get new blank slate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/api/slate/new",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"api",
+						"slate",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create slate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"creator\": \"Benjamin Franklin\",\n    \"topic\": \"We must all hang together\",\n    \"dateCreated\": null,\n    \"selections\": [\n        {\n            \"name\": \"Sure\",\n            \"description\": \"I'm Down\",\n            \"position\": 1\n        },\n        {\n            \"name\": \"No\",\n            \"description\": \"I'd rather not\",\n            \"position\": 2\n        },\n        {\n            \"name\": \"I'd rather drown together\",\n            \"description\": \"It's more romantic\",\n            \"position\": 3\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}/api/slate/new",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"api",
+						"slate",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Slate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/api/slate/show/1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"api",
+						"slate",
+						"show",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
